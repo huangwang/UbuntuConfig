@@ -1,5 +1,6 @@
 #!/bin/sh
 #The script is used for initially configure after ubuntu-gnome 14.04 installed.
+#This script cannot run directly, which needs modification.
 
 #Uninstall unity
 apt-get -y --auto-remove purge unity
@@ -97,8 +98,9 @@ cp ./drupal/site/default/default.settings.php ./drupal/site/default/settings.php
 chmod a+w settings.php
 #create drupal database in phpmyadmin, this is important!
 
-#Install git
+#Install git and its gui
 apt-get install git
+apt-get install gitk
 
 #Install 32bit java
 cp jdk-7u51-linux-i586.tar.gz /opt
