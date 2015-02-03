@@ -162,4 +162,4 @@ apt-get install tor-browser
 apt-get install rar unrar
 
 #Install note software
-sudo apt-get install basket
+apt-get install basket
