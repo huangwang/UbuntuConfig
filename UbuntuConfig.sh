@@ -127,6 +127,13 @@ apt-get install smplayer VLC
 
 #Install sougou language input method
 dpkg -i sogou_pinyin_linux_1.1.0.0037_amd64.deb
+#Uninstall sougou language input method
+dpkg  -l  so*
+dpkg  -r    sogoupinyin
+apt-­get purge  fcitx*
+
+#Install google pinyin input method
+apt-get install ibus-googlepinyin
 
 #Install wps office 
 apt-get install -f
@@ -163,3 +170,13 @@ apt-get install rar unrar
 
 #Install note software
 apt-get install basket
+
+#list the ubuntu service
+ls /etc/init.d/
+service --status-all
+
+#Install tool for listing and edit service
+apt-get install sysv-rc-conf
+
+#Install RSS reader
+apt-get install liferea
