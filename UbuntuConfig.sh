@@ -18,6 +18,18 @@ apt-get -y install gnome
 #Upgrade system
 apt-get upgrade
 
+#Install wireless card driver
+apt-get install linux-headers-generic build-essential git
+git clone https://github.com/lwfinger/rtlwifi_new.git
+cd rtlwifi_new/rtl8723be/
+make
+make install
+modprobe rtl8723be
+
+#Prevents the WiFi card from automatically sleeping and halting connection
+echo "options rtl8723be fwlps=0 swlps=0" > /etc/modprobe.d/rtl8723be.conf
+reboot
+
 #Solve the problem that TTY can not display chinese character
 apt-get -y install fbterm
 fbterm
@@ -180,3 +192,16 @@ apt-get install sysv-rc-conf
 
 #Install RSS reader
 apt-get install liferea
+
+#Install curl, which is a command line tool and library for transferring data with URL syntax
+apt-get install curl
+
+#Install traceroute, which is a tool of print the route packets trace to network host
+apt-get install traceroute
+
+#To find the public IP of my host
+curl ifconfig.me
+
+#list pci or usb device
+lspci
+lsusb
