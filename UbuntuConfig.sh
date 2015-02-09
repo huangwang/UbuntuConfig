@@ -25,10 +25,21 @@ cd rtlwifi_new/rtl8723be/
 make
 make install
 modprobe rtl8723be
+lsmod | grep rtl8723be
 
 #Prevents the WiFi card from automatically sleeping and halting connection
 echo "options rtl8723be fwlps=0 swlps=0" > /etc/modprobe.d/rtl8723be.conf
 reboot
+
+#Install linux kernel header file for compiling program
+apt-get install linux-headers-$(uname -r)
+
+#Install anti-virus software
+apt-get install clamav
+freshclam
+clamscan -r /
+#Install the GUI of clamav
+apt-get install clamtk
 
 #Solve the problem that TTY can not display chinese character
 apt-get -y install fbterm
@@ -133,6 +144,10 @@ visudo
 
 #Install uGet downloader and aria2 plugin
 apt-get install uget aria2
+
+#Install the client of Baidu cloud
+dpkg -i bcloud_3.6.1-1_all.deb
+apt-get -f install
 
 #Install video player 
 apt-get install smplayer VLC
