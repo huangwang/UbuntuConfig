@@ -39,7 +39,7 @@ apt-get install clamav
 freshclam
 clamscan -r /
 #Install the GUI of clamav
-apt-get install clamtk
+#apt-get install clamtk
 
 #Solve the problem that TTY can not display chinese character
 apt-get -y install fbterm
@@ -145,9 +145,16 @@ visudo
 #Install uGet downloader and aria2 plugin
 apt-get install uget aria2
 
+#Install mldonkey for downloading em2k protocol file
+apt-get install mldonkey-server
+apt-get install mldonkey-gui
+
 #Install the client of Baidu cloud
 dpkg -i bcloud_3.6.1-1_all.deb
 apt-get -f install
+
+#Install flash plugin for firefox browser
+apt-get install flashplugin-nonfree
 
 #Install video player 
 apt-get install smplayer VLC
@@ -220,3 +227,25 @@ curl ifconfig.me
 #list pci or usb device
 lspci
 lsusb
+
+#auto remove packets of no use
+apt-get autoremove
+
+#edit /etc/fstab for auto mount ntfs filesytem
+vi /etc/fstab
+
+#Install google earth
+sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0
+apt-get install -f
+dpkg -i google-earth-stable_current_amd64.deb
+
+#Query users and groups
+cat /etc/passwd
+cat /etc/group
+
+#Command for auto update drupal-7
+sudo chown -R daemon:daemon ./drupal/sites
+
+#Enable FTP on your server
+sudo  apt-get  install  vsftpd
+sudo apt-get purge vsftpd
