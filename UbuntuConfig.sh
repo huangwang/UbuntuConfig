@@ -125,6 +125,13 @@ chmod a+w settings.php
 apt-get install git
 apt-get install gitk
 
+#The method of using git
+git status
+git add targetFile
+git commit -m "some explain"
+git push
+
+
 #Install 32bit java
 cp jdk-7u51-linux-i586.tar.gz /opt
 tar -xvzf jdk-7u51-linux-i586.tar.gz
