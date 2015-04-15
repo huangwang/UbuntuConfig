@@ -75,6 +75,11 @@ apt-get -y install npm
 nodejs -v
 npm -v
 
+#Install the front tool, that is yeoman
+npm install -g yo
+
+
+
 #Install docker
 apt-get -y install docker.io
 #Link and fix path
@@ -256,3 +261,18 @@ sudo chown -R daemon:daemon ./drupal/sites
 #Enable FTP on your server
 sudo  apt-get  install  vsftpd
 sudo apt-get purge vsftpd
+
+#Analyse file format
+file java
+
+#tar  command help
+tar -czf all.tar.gz *.jpg 
+tar -xzf all.tar.gz 
+
+#Install fcitx input method
+sudo apt-get install fcitx-table-wbpy
+#添加源&安装fcitx
+sudo add-apt-repository ppa:fcitx-team/nightly
+sudo apt-get install fcitx fcitx-config-gtk fcitx-googlepinyin fcitx-module-cloudpinyin  fcitx-sogoupinyin  im-switch
+#切换到fcitx输入法
+sudo im-switch -s fcitx -z default
