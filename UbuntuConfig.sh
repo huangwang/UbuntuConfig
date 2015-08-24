@@ -53,6 +53,8 @@ update-grub
 #Install lamp
 chmod +x bitnami-lampstack-5.4.36-0-linux-x64-installer.run
 ./bitnami-lampstack-5.4.36-0-linux-x64-installer.run
+#edit apache httpd.conf for solving the problem of apache bind to ipv6, not the ipv4
+#Listen 0.0.0.0:80
 
 #Install lamp environment
 apt-get -y install lamp-server^
@@ -185,53 +187,12 @@ apt-get install ibus-googlepinyin
 apt-get install -f
 dpkg -i wps-office_8.1.0.3724~b1p2_i386.deb
 
-#Install wine
-apt-get install wine
-#put FoxitReader.exe to .wine/drive_c/Windows folder, and then use wine to run it
-wine FoxitReader.exe
-
-#Install chm reader
-apt-get install xchm
-
-#Install dictionary
-apt-get install stardict
-#Go to http://abloz.com/huzheng/stardict-dic/zh_CN/ for downloading dictionary
-#put the dictionary to 	/usr/share/stardict/dic and then uncompress them
-
-#Install wireshark
-apt-get instlal wireshark
-#Set non-root user to capture packet
-groupadd wireshark 
-chgrp wireshark /usr/bin/dumpcap 
-chmod 4755 /usr/bin/dumpcap 
-gpasswd ­-a useraccount wireshark
-
-#Install tor
-add-apt-repository ppa:webupd8team/tor-browser
-apt-get update
-apt-get install tor-browser
-
-#Install rar
-apt-get install rar unrar
-
-#Install note software
-apt-get install basket
-
 #list the ubuntu service
 ls /etc/init.d/
 service --status-all
 
 #Install tool for listing and edit service
 apt-get install sysv-rc-conf
-
-#Install RSS reader
-apt-get install liferea
-
-#Install curl, which is a command line tool and library for transferring data with URL syntax
-apt-get install curl
-
-#Install traceroute, which is a tool of print the route packets trace to network host
-apt-get install traceroute
 
 #To find the public IP of my host
 curl ifconfig.me
@@ -245,6 +206,50 @@ apt-get autoremove
 
 #edit /etc/fstab for auto mount ntfs filesytem
 vi /etc/fstab
+
+#Install wine
+apt-get install wine
+#put FoxitReader.exe to .wine/drive_c/Windows folder, and then use wine to run it
+wine FoxitReader.exe
+
+#Install chm reader
+apt-get install xchm
+
+#Install wireshark
+apt-get install wireshark
+#Set non-root user to capture packet
+groupadd wireshark 
+chgrp wireshark /usr/bin/dumpcap 
+chmod 4755 /usr/bin/dumpcap 
+gpasswd ­-a useraccount wireshark
+
+#Go to http://abloz.com/huzheng/stardict-dic/zh_CN/ for downloading dictionary
+#put the dictionary to 	/usr/share/stardict/dic and then uncompress them
+#Install dictionary
+apt-get install stardict
+
+#Install RSS reader
+apt-get install liferea
+
+#Install curl, which is a command line tool and library for transferring data with URL syntax
+apt-get install curl
+
+#Install traceroute, which is a tool of print the route packets trace to network host
+apt-get install traceroute
+
+#Install tor
+apt-get install tor
+service tor start
+proxychains iceweasel
+
+#Install rar
+apt-get install rar unrar
+
+#Install note software
+apt-get install basket
+
+#software used in linux
+apt-get install anki xmind freemind 
 
 #Install google earth
 sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0
@@ -276,3 +281,80 @@ sudo add-apt-repository ppa:fcitx-team/nightly
 sudo apt-get install fcitx fcitx-config-gtk fcitx-googlepinyin fcitx-module-cloudpinyin  fcitx-sogoupinyin  im-switch
 #切换到fcitx输入法
 sudo im-switch -s fcitx -z default
+
+#iptables firewall
+iptables -L -n | grep 80
+#shutdown iptables firewall
+iptables -P INPUT ACCEPT   
+iptables -P OUTPUT ACCEPT 
+
+#系统
+uname -a               # 查看内核/操作系统/CPU信息
+head -n 1 /etc/issue   # 查看操作系统版本 
+cat /proc/cpuinfo      # 查看CPU信息
+hostname               # 查看计算机名 
+lspci -tv              # 列出所有PCI设备
+lsusb -tv              # 列出所有USB设备 
+lsmod                  # 列出加载的内核模块
+env                    # 查看环境变量
+
+#资源
+free -m                # 查看内存使用量和交换区使用量 
+df -h                  # 查看各分区使用情况 
+du -sh <目录名>        # 查看指定目录的大小 
+grep MemTotal /proc/meminfo   # 查看内存总量
+grep MemFree /proc/meminfo    # 查看空闲内存量
+uptime                 # 查看系统运行时间、用户数、负载 
+cat /proc/loadavg      # 查看系统负载
+
+#磁盘和分区
+mount | column -t      # 查看挂接的分区状态 
+fdisk -l               # 查看所有分区 
+swapon -s              # 查看所有交换分区
+hdparm -i /dev/hda     # 查看磁盘参数(仅适用于IDE设备)  
+dmesg | grep IDE       # 查看启动时IDE设备检测状况
+
+#网络
+ifconfig               # 查看所有网络接口的属性
+iptables -L            # 查看防火墙设置 
+route -n               # 查看路由表 
+netstat -lntp          # 查看所有监听端口 
+netstat -antp          # 查看所有已经建立的连接
+netstat -s             # 查看网络统计信息
+
+#进程
+ps -ef                 # 查看所有进程 
+top                    # 实时显示进程状态
+用户 w                      # 查看活动用户 
+id <用户名>            # 查看指定用户信息  
+last                   # 查看用户登录日志  
+cut -d: -f1 /etc/passwd   # 查看系统所有用户  
+cut -d: -f1 /etc/group    # 查看系统所有组  
+crontab -l             # 查看当前用户的计划任务
+
+#服务
+chkconfig --list       # 列出所有系统服务  
+chkconfig --list | grep on    # 列出所有启动的系统服务
+
+#程序
+rpm -qa                # 查看所有安装的软件包
+
+#the audit tool
+lynis -c -Q
+
+#maintain symbolic links determining default command
+update-alternatives --display java 
+update-alternatives --install /usr/bin/java java /opt/java/jdk1.6.0_27/bin/java 1062  
+
+#display pci device
+lspci | grep -i vga
+
+#manage wireless device
+rfkill block list
+
+#Clone Iso image to mobile device
+dd if=kali.Iso of =/dev/sdb bs=512k
+
+#part storage device
+gparted /dev/sdb
+
