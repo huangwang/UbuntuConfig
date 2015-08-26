@@ -358,3 +358,9 @@ dd if=kali.Iso of =/dev/sdb bs=512k
 #part storage device
 gparted /dev/sdb
 
+#dump traffic on a network
+tcpdump -i  wlan0
+
+#Install and remove System-V style init script links
+# make service start or remove with system boot
+update-rc.d postgresql enable
