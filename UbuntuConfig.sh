@@ -78,7 +78,7 @@ nodejs -v
 npm -v
 
 #Install the front tool, that is yeoman
-npm install -g yo
+npm install -g yo bower  grunt
 
 
 
@@ -195,7 +195,13 @@ service --status-all
 apt-get install sysv-rc-conf
 
 #To find the public IP of my host
-curl ifconfig.me
+curl ifconfig.me/all
+curl icanhazip.com
+curl curlmyip.com
+curl ip.appspot.com
+curl ipinfo.io/ip
+curl ipecho.net/plain
+curl www.trackip.net/i
 
 #list pci or usb device
 lspci
@@ -214,6 +220,9 @@ wine FoxitReader.exe
 
 #Install chm reader
 apt-get install xchm
+
+#Install notebook
+apt-get install rednotebook 
 
 #Install wireshark
 apt-get install wireshark
@@ -364,3 +373,8 @@ tcpdump -i  wlan0
 #Install and remove System-V style init script links
 # make service start or remove with system boot
 update-rc.d postgresql enable
+
+#Make a bootable USB device with Linux OS
+dd if=kali.iso of=/dev/sdb bs=512k
+#Add Persistence function for USB device
+gparted /dev/sdb
