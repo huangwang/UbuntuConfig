@@ -391,9 +391,18 @@ git branch <name>
 git checkout <name>
 #创建+切换分支：
 git checkout -b <name>
-#合并某分支到当前分支：
+#合并某分支到当前分支，删除分支后，分支信息将丢失：
 git merge <name>
+#合并某分支到当前分支，并保留分支信息
+git merge --no-ff -m "merge with no-ff" dev
 #删除分支：
 git branch -d <name>
 #解决冲突
 git log --graph
+#Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：
+git stash
+git stash apply
+git stash drop
+git stash pop
+git stash list
+git stash apply stash@{0}
