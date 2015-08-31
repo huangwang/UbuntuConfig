@@ -378,3 +378,6 @@ update-rc.d postgresql enable
 dd if=kali.iso of=/dev/sdb bs=512k
 #Add Persistence function for USB device
 gparted /dev/sdb
+
+#在 Bash Unix 或者 Linux shell 中逐行读取一个文件的语法
+while IFS= read -r line; do COMMAND_on $line; done < input.file
