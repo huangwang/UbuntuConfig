@@ -395,3 +395,5 @@ git checkout -b <name>
 git merge <name>
 #删除分支：
 git branch -d <name>
+#解决冲突
+git log --graph
