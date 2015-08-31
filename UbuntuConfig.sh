@@ -381,3 +381,17 @@ gparted /dev/sdb
 
 #在 Bash Unix 或者 Linux shell 中逐行读取一个文件的语法
 while IFS= read -r line; do COMMAND_on $line; done < input.file
+
+#Git鼓励大量使用分支：
+#查看分支：
+git branch
+#创建分支：
+git branch <name>
+#切换分支：
+git checkout <name>
+#创建+切换分支：
+git checkout -b <name>
+#合并某分支到当前分支：
+git merge <name>
+#删除分支：
+git branch -d <name>
