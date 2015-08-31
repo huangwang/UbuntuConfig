@@ -408,3 +408,7 @@ git stash list
 git stash apply stash@{0}
 #要查看远程库的信息
 git remote -v
+#创建远程origin的dev分支到本地
+git checkout -b dev origin/dev
+#推送本地origin的dev分支到远程
+git push orgin dev
