@@ -406,3 +406,5 @@ git stash drop
 git stash pop
 git stash list
 git stash apply stash@{0}
+#要查看远程库的信息
+git remote -v
