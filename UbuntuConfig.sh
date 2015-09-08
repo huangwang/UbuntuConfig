@@ -318,6 +318,8 @@ cat /proc/loadavg      # 查看系统负载
 
 #磁盘和分区
 mount | column -t      # 查看挂接的分区状态 
+mount /dev/sda1 /mnt        ### 将 sda1 挂载到 /mnt 中
+umount /mnt                 ### 卸载 /mnt 这个挂载点的文件系统
 fdisk -l               # 查看所有分区 
 swapon -s              # 查看所有交换分区
 hdparm -i /dev/hda     # 查看磁盘参数(仅适用于IDE设备)  
@@ -340,6 +342,15 @@ last                   # 查看用户登录日志
 cut -d: -f1 /etc/passwd   # 查看系统所有用户  
 cut -d: -f1 /etc/group    # 查看系统所有组  
 crontab -l             # 查看当前用户的计划任务
+
+#Command
+tar -cvf filename.tar .       ### 将当前目录所有文件归档，但不压缩，注意后面有个 ’.‘ ，不可省略，代表当前目录的意思 
+tar -xvf filename.tar         ### 解压 filename.tar 到当前文件夹
+useradd -m -g users -G audio -s /usr/bin/bash newuser     ### -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名
+whereis bash  #whereis 用于查找文件、手册等。
+find . -name PATTERN    ### 从当前目录查找符合 PATTERN 的文件
+wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.md     ### 下载 README 文件并重命名为 newname.md
+wget -c url     ### 下载 url 并开启断点续传
 
 #服务
 chkconfig --list       # 列出所有系统服务  
@@ -412,3 +423,37 @@ git remote -v
 git checkout -b dev origin/dev
 #推送本地origin的dev分支到远程
 git push orgin dev
+
+#因此，多人协作的工作模式通常是这样：
+#1. 首先，可以试图用git push origin branch-name推送自己的修改；
+#2. 如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+#3. 如果合并有冲突，则解决冲突，并在本地提交；
+#4. 没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+#5. 如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。
+#这就是多人协作的工作模式，一旦熟悉了，就非常简单。
+
+#在Git中打标签非常简单，首先，切换到需要打标签的分支上：
+#然后，敲命令git tag <name>就可以打一个新标签：
+git tag v1.0
+
+#find file
+locate filename
+find -name france1.jpg
+find /var/log syslog
+find / -name syslog
+find /var -size +10M
+find -name *.jpg -atime -7
+find /var/log -name mysql -type d
+find -name *.jpg -print
+find -name *.jpg -delete
+
+#adjust the color temperature of my screen
+redshift -l 25:100  &
+
+#kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息亦保存在/var/log目录中，名称为dmesg的文件里。
+#终端输入dmesg，可以看到每行最开始显示的是一个综括号，里面的数字为timestamp，时间戳，该时间指示的系统从开机到现在的运行时间，单位为s 秒。
+dmesg
+#以当前时间的方式显示时间信息，而不是图1所示的开机时间
+dmesg -T
+#显示dmesg中两条打印信息的时间间隔
+dmesg -d
