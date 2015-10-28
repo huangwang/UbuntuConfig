@@ -123,10 +123,13 @@ cd /var/www/
 tar -xzvf drupal-7.28.tar.gz
 rm drupal-7.28.tar.gz
 mv drupal-7.28/ drupal/
-chmod a+w ./drupal/site/default
-cp ./drupal/site/default/default.settings.php ./drupal/site/default/settings.php 
+chmod a+w ./drupal/sites/default
+cp ./drupal/sites/default/default.settings.php ./drupal/site/default/settings.php 
 chmod a+w settings.php
 #create drupal database in phpmyadmin, this is important!
+#
+#Command for auto update drupal-7
+sudo chown -R daemon:daemon ./drupal/sites
 
 #Install git and its gui
 apt-get install git
@@ -146,10 +149,10 @@ rm jdk-7u51-linux-i586.tar.gz
 #to support 32bit program
 apt-get install ia32-libs
 #set JAVA_HOME,JAVA_CLASSPATH,PATH for java program in /etc/envrionment
-#export JAVA_HOME=/opt/jdk1.8.0_31
-#export JRE_HOME=${JAVA_HOME}/jre
-#export JAVA_CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib 
-#export PATH=${JAVA_HOME}/bin:/opt/sublime_text_3:$PATH
+export JAVA_HOME=/opt/jdk1.8.0_31
+export JRE_HOME=${JAVA_HOME}/jre
+export JAVA_CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib 
+export PATH=${JAVA_HOME}/bin:/opt/sublime_text_3:$PATH
 
 #Solve command can not found when sudo command
 #visudo will edit /etc/sudoers, add the command path to secure_path
@@ -269,9 +272,6 @@ dpkg -i google-earth-stable_current_amd64.deb
 cat /etc/passwd
 cat /etc/group
 
-#Command for auto update drupal-7
-sudo chown -R daemon:daemon ./drupal/sites
-
 #Enable FTP on your server
 sudo  apt-get  install  vsftpd
 sudo apt-get purge vsftpd
@@ -364,7 +364,7 @@ lynis -c -Q
 
 #maintain symbolic links determining default command
 update-alternatives --display java 
-update-alternatives --install /usr/bin/java java /opt/java/jdk1.6.0_27/bin/java 1062  
+update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_31/bin/java 1072  
 
 #display pci device
 lspci | grep -i vga
@@ -423,6 +423,8 @@ git remote -v
 git checkout -b dev origin/dev
 #推送本地origin的dev分支到远程
 git push orgin dev
+#在Git v1.7.0 之后，可以使用这种语法删除远程分支：
+git push origin --delete <branchName>
 
 #因此，多人协作的工作模式通常是这样：
 #1. 首先，可以试图用git push origin branch-name推送自己的修改；
@@ -437,6 +439,7 @@ git push orgin dev
 git tag v1.0
 
 #find file
+updatedb 
 locate filename
 find -name france1.jpg
 find /var/log syslog
@@ -457,3 +460,24 @@ dmesg
 dmesg -T
 #显示dmesg中两条打印信息的时间间隔
 dmesg -d
+
+#Verify md5sum
+ md5sum -c  md5.txt 
+
+#Run 32 bit program in 64 bit linux
+dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install ia32-libs
+
+#Install the excellent terminator
+apt-get install terminator
+
+#decompress a lot of files
+for tar in *.tar.gz; do tar xvf $tar; done
+
+#monitor tools
+apt-get install htop iftop nethogs 
+
+#backup and resume linux system
+tar cvpzf backup.tgz --exclude=/proc --exclude=/lost+found --exclude=/backup.tgz --exclude=/mnt --exclude=/sys --exclude=/media /
+tar xvpfz backup.tgz -C /
