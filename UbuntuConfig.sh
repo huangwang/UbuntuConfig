@@ -481,3 +481,25 @@ apt-get install htop iftop nethogs
 #backup and resume linux system
 tar cvpzf backup.tgz --exclude=/proc --exclude=/lost+found --exclude=/backup.tgz --exclude=/mnt --exclude=/sys --exclude=/media /
 tar xvpfz backup.tgz -C /
+
+#Install Torrent Download software
+apt-get install transmission
+
+#To see every process on the system using standard syntax
+ps -ef
+
+#Invert the sense of matching, to select non-matching  lines
+grep -v grep
+
+#Say we have a text file containing the following.
+#	bob 23 45 hello
+#	jim 12 88 bye
+#If we cat the file and do the awk print $2 thing, we get the following out.
+#	23
+#	12
+#简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。
+#awk '{pattern + action}' {filenames}
+awk `{print $2}` $fileName
+
+#find java process and kill it
+kill -9 $(ps -ef | grep java | grep -v grep | awk '{print $2}')
