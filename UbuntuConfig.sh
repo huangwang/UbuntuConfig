@@ -503,3 +503,4 @@ awk `{print $2}` $fileName
 
 #find java process and kill it
 kill -9 $(ps -ef | grep java | grep -v grep | awk '{print $2}')
+
