@@ -504,3 +504,6 @@ awk `{print $2}` $fileName
 #find java process and kill it
 kill -9 $(ps -ef | grep java | grep -v grep | awk '{print $2}')
 
+#md5校验
+md5sum file > file.md5sum
+md5sum -c file.md5sum
