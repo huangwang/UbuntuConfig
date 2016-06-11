@@ -159,6 +159,9 @@ export PATH=${JAVA_HOME}/bin:/opt/sublime_text_3:$PATH
 #In visudo command mode, press the key of esc, and then press the X key to leave
 visudo
 
+#add user to sudo group
+usermod -a -G sudo username1
+
 #Install uGet downloader and aria2 plugin
 apt-get install uget aria2
 
@@ -374,6 +377,9 @@ rfkill block list
 
 #Clone Iso image to mobile device
 dd if=kali.Iso of =/dev/sdb bs=512k
+
+#Make ISO file from  cdrom
+dd if=/dev/cdrom of=./Win7.iso
 
 #part storage device
 gparted /dev/sdb
