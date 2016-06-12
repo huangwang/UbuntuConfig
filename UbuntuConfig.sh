@@ -160,6 +160,9 @@ export PATH=${JAVA_HOME}/bin:/opt/sublime_text_3:$PATH
 #In visudo command mode, press the key of esc, and then press the X key to leave
 visudo
 
+#add user to sudo group
+usermod -a -G sudo username1
+
 #Install uGet downloader and aria2 plugin
 apt-get install uget aria2
 
@@ -378,6 +381,9 @@ rfkill block list
 #Clone Iso image to mobile device
 dd if=kali.Iso of=/dev/sdb bs=512k
 
+#Make ISO file from  cdrom
+dd if=/dev/cdrom of=./Win7.iso
+
 #part storage device
 gparted /dev/sdb
 
@@ -510,6 +516,7 @@ awk `{print $2}` $fileName
 #find java process and kill it
 kill -9 $(ps -ef | grep java | grep -v grep | awk '{print $2}')
 
+<<<<<<< HEAD
 #Find the inode information for file
 stat example.txt
 
@@ -524,3 +531,7 @@ rename 's/bartik/blog/' *.yml
 
 #virtualBox manage
 VBoxManage list vms
+
+#md5校验
+md5sum file > file.md5sum
+md5sum -c file.md5sum
