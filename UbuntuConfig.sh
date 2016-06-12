@@ -37,7 +37,7 @@ apt-get install linux-headers-$(uname -r)
 #Install anti-virus software
 apt-get install clamav
 freshclam
-clamscan -r /
+clamscan -r  --bell -i  / -l /tmp/clamav.log
 #Install the GUI of clamav
 #apt-get install clamtk
 
@@ -136,6 +136,7 @@ apt-get install git
 apt-get install gitk
 
 #The method of using git
+git init
 git status
 git add targetFile
 git commit -m "some explain"
@@ -347,8 +348,10 @@ crontab -l             # 查看当前用户的计划任务
 tar -cvf filename.tar .       ### 将当前目录所有文件归档，但不压缩，注意后面有个 ’.‘ ，不可省略，代表当前目录的意思 
 tar -xvf filename.tar         ### 解压 filename.tar 到当前文件夹
 useradd -m -g users -G audio -s /usr/bin/bash newuser     ### -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名
+usermod -a -G groupA user #将一个用户添加到用户组中
 whereis bash  #whereis 用于查找文件、手册等。
 find . -name PATTERN    ### 从当前目录查找符合 PATTERN 的文件
+find . -iname PATTERN    ### 从当前目录查找符合 PATTERN 的文件,但是不区分大小写
 wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.md     ### 下载 README 文件并重命名为 newname.md
 wget -c url     ### 下载 url 并开启断点续传
 
@@ -373,7 +376,7 @@ lspci | grep -i vga
 rfkill block list
 
 #Clone Iso image to mobile device
-dd if=kali.Iso of =/dev/sdb bs=512k
+dd if=kali.Iso of=/dev/sdb bs=512k
 
 #part storage device
 gparted /dev/sdb
@@ -453,6 +456,9 @@ find -name *.jpg -delete
 #adjust the color temperature of my screen
 redshift -l 25:100  &
 
+#learning music theory
+apt-get install lenmus
+
 #kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息亦保存在/var/log目录中，名称为dmesg的文件里。
 #终端输入dmesg，可以看到每行最开始显示的是一个综括号，里面的数字为timestamp，时间戳，该时间指示的系统从开机到现在的运行时间，单位为s 秒。
 dmesg
@@ -503,3 +509,18 @@ awk `{print $2}` $fileName
 
 #find java process and kill it
 kill -9 $(ps -ef | grep java | grep -v grep | awk '{print $2}')
+
+#Find the inode information for file
+stat example.txt
+
+#Find the size of inode
+sudo dumpe2fs -h /dev/hda | grep "Inode size"
+
+#Find the inode of the file
+ls -i example.txt
+
+#Rename multi-files
+rename 's/bartik/blog/' *.yml
+
+#virtualBox manage
+VBoxManage list vms
