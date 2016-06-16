@@ -350,7 +350,7 @@ crontab -l             # 查看当前用户的计划任务
 #Command
 tar -cvf filename.tar .       ### 将当前目录所有文件归档，但不压缩，注意后面有个 ’.‘ ，不可省略，代表当前目录的意思 
 tar -xvf filename.tar         ### 解压 filename.tar 到当前文件夹
-useradd -m -g users -G audio -s /usr/bin/bash newuser     ### -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名
+useradd -m -d /home/newuser -g users -G sudo -s /bin/bash newuser     ### -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名
 usermod -a -G groupA user #将一个用户添加到用户组中
 whereis bash  #whereis 用于查找文件、手册等。
 find . -name PATTERN    ### 从当前目录查找符合 PATTERN 的文件
@@ -516,7 +516,6 @@ awk `{print $2}` $fileName
 #find java process and kill it
 kill -9 $(ps -ef | grep java | grep -v grep | awk '{print $2}')
 
-<<<<<<< HEAD
 #Find the inode information for file
 stat example.txt
 
@@ -535,3 +534,12 @@ VBoxManage list vms
 #md5校验
 md5sum file > file.md5sum
 md5sum -c file.md5sum
+
+#查看内存条和内存槽信息
+dmidecode | grep -A16 "Memory Device$"
+
+#远程桌面访问
+rdesktop 192.168.56.102
+
+#
+dpkg --add-architecture i386
