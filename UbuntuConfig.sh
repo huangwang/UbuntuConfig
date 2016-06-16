@@ -543,3 +543,6 @@ rdesktop 192.168.56.102
 
 #
 dpkg --add-architecture i386
+
+#允许chrome访问本地文件
+google-chrome --allow-file-access-from-files
