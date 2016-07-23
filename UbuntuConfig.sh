@@ -242,7 +242,8 @@ gpasswd ­-a useraccount wireshark
 #Go to http://abloz.com/huzheng/stardict-dic/zh_CN/ for downloading dictionary
 #put the dictionary to 	/usr/share/stardict/dic and then uncompress them
 #Install dictionary
-apt-get install stardict
+#两款翻译软件
+apt-get install stardict goldendict
 
 #Install RSS reader
 apt-get install liferea
@@ -546,3 +547,6 @@ dpkg --add-architecture i386
 
 #允许chrome访问本地文件
 google-chrome --allow-file-access-from-files
+
+#安装中文字体即可，推荐文泉驿字体
+apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
