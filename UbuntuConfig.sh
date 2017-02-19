@@ -269,7 +269,13 @@ apt-get install basket
 apt-get install anki xmind freemind 
 
 #Install google earth
-sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0
+cd /tmp
+wget http://ftp.us.debian.org/debian/pool/main/l/lsb/lsb-security_4.1+Debian13+nmu1_amd64.deb
+sudo dpkg -i lsb-security_4.1+Debian13+nmu1_amd64.deb
+wget http://ftp.us.debian.org/debian/pool/main/l/lsb/lsb-invalid-mta_4.1+Debian13+nmu1_all.deb
+sudo dpkg -i lsb-invalid-mta_4.1+Debian13+nmu1_all.deb
+wget http://ftp.us.debian.org/debian/pool/main/l/lsb/lsb-core_4.1+Debian13+nmu1_amd64.deb
+sudo dpkg -i lsb-core_4.1+Debian13+nmu1_amd64.deb
 apt-get install -f
 dpkg -i google-earth-stable_current_amd64.deb
 
@@ -550,3 +556,32 @@ google-chrome --allow-file-access-from-files
 
 #安装中文字体即可，推荐文泉驿字体
 apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
+
+#去掉文件或目录的执行权限
+sudo chmod a-x -R *
+
+#给文件目录所有者增加执行权限
+sudo chmod u+X -R *
+
+#调用密码库 charset.lst，生成8位密码；其中元素为 密码库 charset.lst中 mixalpha-numeric-all-space的项；
+#格式为“两个小写字母+dog+三个小写字母”，并以cbdogaaa开始枚举（@代表小写字母）
+crunch 8 8 -f charset.lst mixalpha-numeric-all-space -o wordlist.txt -t @@dog @@@ -s cbdogaaa
+
+#crunch将生成以“dog”“cat”“bird”为元素的所有密码组合：
+#birdcatdog，birddogcat，catbirddog,   catdogbird,  dogbirdcat, dogcatbird
+crunch 4 5 -p dog cat bird
+
+#生成4位密码，其中格式为“两个数字”+“一个小写字母”+“常见符号”（其中数字这里被指定只能为123组成的所有2位数字组合）。
+#比如12f#      32j^    13t$    ......
+crunch 4 4  + + 123 + -t %%@^
+
+#生成3位密码，其中第一位由“a，b，c”中的一个；第二位为“1,2,3”中的一个；第三位为“！，@，#”中的一个。比如1a！   2a#      3b@ 	
+# @代表小写字母
+# ,代表大写字母    
+# %代表数字
+# ^代表符号
+crunch 3 3 abc + 123 @#! -t @%^
+
+#查询公网IP
+echo $(wget -qO - https://api.ipify.org)
+echo $(curl -s https://api.ipify.org)
