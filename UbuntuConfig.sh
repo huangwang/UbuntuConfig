@@ -585,3 +585,6 @@ crunch 3 3 abc + 123 @#! -t @%^
 #查询公网IP
 echo $(wget -qO - https://api.ipify.org)
 echo $(curl -s https://api.ipify.org)
+
+#删除ipv6默认路由
+ip -6 route del default dev eth0
